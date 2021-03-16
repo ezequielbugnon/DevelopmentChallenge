@@ -1,9 +1,18 @@
 import express from 'express';
-import connectionDB from './db'
+import { db } from './db/index.js';
+import userRoutes from './api/routes/userRoutes.js';
+import morgan from 'morgan';
 
 const app = express();
-connectionDB();
+db();
 
-app.set('port', 3000, process.env.PORT)
+app.set('port', 3000, process.env.PORT);
 
-app.listen(app.get('port'), () => console.log("The app server has started!!!"))
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(morgan('dev'));
+
+
+app.use('/api_moviesapp', userRoutes);
+
+app.listen(app.get('port'), () => console.log("The app server has started!!!"));

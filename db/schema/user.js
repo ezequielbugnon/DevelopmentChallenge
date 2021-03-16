@@ -1,5 +1,7 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 import bcrypt from 'bcryptjs';
+import mongoose_unique from 'mongoose-unique-validator';
 
 const userSchema = new Schema({
     name: { type: String, required: [true, 'The name is required']},
@@ -18,4 +20,6 @@ userSchema.methods.comparePassword = async function (password){
     return result
 }
 
-module.exports=  mongoose.model('User', userSchema)
+userSchema.plugin(mongoose_unique, { message: '{PATH} debe de ser único' });
+
+export default mongoose.model('User', userSchema);
