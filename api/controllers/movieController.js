@@ -197,7 +197,3 @@ export async function addImage(req, res){
         }
     }
 }
-
-export async function deleteImage(req, res){
-
-}
