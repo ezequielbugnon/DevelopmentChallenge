@@ -235,15 +235,15 @@ Please, send this data:
 
 ### Methods DELETE
 
-1. http://localhost:3000/api_moviesapp/actors/delete/idActor -> ejemplo : 6052e440cf3ba32697677d98
+1. http://localhost:3000/api_moviesapp/actors/delete/idActor -> example : 6052e440cf3ba32697677d98
 
 ```
 Please, send this data: 
-    By cabezera -> Authorization: Token de usuario
+    By headers -> Authorization: Token of user
 ```
 
 ## Autores ✒️
 
 
-* **Bugnon ezequiel** - *Trabajo Inicial* - [bugnonezequiel](https://github.com/bugnonezequiel)
+* **Bugnon ezequiel**  - [bugnonezequiel](https://github.com/bugnonezequiel)
 
