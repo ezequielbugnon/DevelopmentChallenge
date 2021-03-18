@@ -245,5 +245,5 @@ Please, send this data:
 ## Autores ✒️
 
 
-* **Bugnon ezequiel**  - [bugnonezequiel](https://github.com/bugnonezequiel)
+* **Bugnon ezequiel**  - [bugnonezequiel](https://github.com/ezequielbugnon)
 
