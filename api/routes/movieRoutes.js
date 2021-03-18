@@ -5,7 +5,9 @@ import {
     createMovie,
     deleteMovie,
     editMovie,
-    searchMovie
+    searchMovie,
+    addActorInMovie,
+    addImage
 } from '../controllers/movieController.js';
 import token from '../../jwt/index.js'
 
@@ -17,5 +19,7 @@ router.post('/movies/add',token.check, createMovie);
 router.delete('/movies/delete/:id',token.check, deleteMovie);
 router.put('/movies/edit/:id', token.check, editMovie); 
 router.get('/movies/search/:search', searchMovie); 
+router.post('/movies/addActor/:id', token.check, addActorInMovie); 
+router.post('/movies/addImage/:id', token.check, addImage); 
 
 export default router;

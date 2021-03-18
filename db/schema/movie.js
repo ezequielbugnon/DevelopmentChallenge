@@ -8,6 +8,11 @@ const movieSchema = new Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: "Director"
     },
+    actors:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Actor"
+    }],
+    image: {type: String },
     updated_at: { type: Date, default: Date.now() }
 })
 
