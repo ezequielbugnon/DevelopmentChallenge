@@ -25,7 +25,6 @@ export async function register(req, res){
 }
 
 export async function login (req, res){
-        console.log(req.body)
         const {email, password } = req.body
         if(validateEmail(email) && validatePassword(password)){
           isUserExists(email, password, res);
