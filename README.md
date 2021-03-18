@@ -1,102 +1,102 @@
 # DevelopmentChallenge
 
-_Este proyecto es un desafio desarrollado para Improve-in_
+_This project is a challenge for Improve-in_
 
-## Comenzando 🚀
+## Starting 🚀
 
-_En primer lugar debera clonar el repositorio y descargar los paquetes ejecutando npm i y luego npm run start_
+_First, you should clone the repository and download the packages_
+
+_Second, you should execute npm i and npm run start_
 
 
-### Pre-requisitos 📋
+### Pre-requirements  📋
 
-_Deberas tener instalado Node js y npm_
+_You should have installed Node js y npm_
 
-### Instalación 🔧
+### Installation 🔧
 
-_Una vez clonado o descargado el repositorio por favor ejecuta en la raiz del proyecto:_
+_Once you cloned or download the repository, runing in this root project:_
 
-_Paso uno_
+_First_
 
 ```
 npm install 
 ```
 
-_Y luego_
+_And then_
 
 ```
 npm run start
 ```
 
-_De este modo ya tienes la api corriendo en http://localhost:3000/api_moviesapp/movies_
+_this app will be running in port: http://localhost:3000/api_moviesapp/movies_
 
-## Ejecucion
+## Execution
 
-_A partir de aqui se listan los endpoint y sus usos_
+_List of endpoints_
 
 
-## rutas de usuario
+## Routes of users 
 
-_Rutas para autenticar usuarios_
+_Routes for authentication users_
 
 ### Methods POST
 
 1. http://localhost:3000/api_moviesapp/user/register
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por body -> {
+Please, send this data: 
+    By body -> {
         "name": "example",
         "email": "example@gmail.com",
         "password": "123456"
     }
 ```
 
-_Retorna token de usuario para ser utilizado como cabezera en las rutas protegidas_
+_Returns token of users to be used with headers in the protected routes_
 
 
 2. http://localhost:3000/api_moviesapp/user/login
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por body -> {
+Please, send this data: 
+    By body -> {
         "email": "example@gmail.com",
         "password": "123456"
     }
 ```
-_Si te encuentras registrado, retorna token de usuario para ser utilizado como cabezera en las rutas protegidas_
+_If you are registered, returns token of users to be used with headers in the protected routes__
 
 
 ### Methods GET
 
 1. http://localhost:3000/api_moviesapp/user/me
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos:
-    Por cabezera -> Authorization: Token de usuario
+Please, send this data:
+    by headers -> Authorization: Token of user
 ```
-_Retorna datos de usuario vinculado al token_
+_Returns data of user linked to the token_
 
-## rutas de director
-
-_Rutas de director_ 
+## Routes of director
 
 ### Methods POST 
 
 1. http://localhost:3000/api_moviesapp/directors/add
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por body -> {
-	    "name":"nombre de director"
+Please, send this data:
+    by headers -> Authorization: Token of user
+    by body -> {
+	    "name":"name of the director"
     }
 ```
 
@@ -105,132 +105,130 @@ Por favor envia los siguiente datos:
 
 1. http://localhost:3000/api_moviesapp/directors
 
-_Retorna todos los directores_
+_Returns all directors_
 
-2. http://localhost:3000/api_moviesapp/directors/:idDirector -> ejemplo : 60511c5ffa528726c634428c
+2. http://localhost:3000/api_moviesapp/directors/:idDirector -> example : 60511c5ffa528726c634428c
 
-_Retorna un director_
+_Returns one director_
 
 
 ### Methods DELETE 
 
-1. http://localhost:3000/api_moviesapp/directors/delete/idDirector -> ejemplo : 60511c5ffa528726c634428c
+1. http://localhost:3000/api_moviesapp/directors/delete/idDirector -> example : 60511c5ffa528726c634428c
 
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
+Please, send this data:
+    By headers -> Authorization: Token of user
 ```
 
-## Rutas de Peliculas 
+## Routes of movies
 
-_Rutas de la peliculas_
 
 ### Methods GET
 
 1. http://localhost:3000/api_moviesapp/movies 
 
-_Retorna todas las peliculas_
+_Returns all movies_
 
-2. http://localhost:3000/api_moviesapp/movies/:id-movie -> ejemplo : 6051367766114b36341c5d33
+2. http://localhost:3000/api_moviesapp/movies/:id-movie -> example : 6051367766114b36341c5d33
 
-_Retorna una pelicula segun su id_
+_Returns one movie_
 
-3. http://localhost:3000/api_moviesapp/movies/search/:search -> ejemplo : back the future
+3. http://localhost:3000/api_moviesapp/movies/search/:search -> example : back the future
 
-_Retorna lo que coincida con la busqueda_
+_Returns the data that is matched_
 
 
 ### Methods POST
 
 1. http://localhost:3000/api_moviesapp/movies/add 
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por body -> {
-        "name": "nombre de la pelicula",
+Please, send this data: 
+    By headers -> Authorization: Token of user
+    By body -> {
+        "name": "name of the movie",
         "director": "Director ID"
     }
 ```
 
-2. http://localhost:3000/api_moviesapp/movies/addActor/:idMovie -> ejemplo : 60528b0bbcbf140ec9984788
+2. http://localhost:3000/api_moviesapp/movies/addActor/:idMovie -> example : 60528b0bbcbf140ec9984788
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por body -> {
+Please, send this data:
+    By headers -> Authorization: Token of user
+    By body -> {
 	    "actorID":"6052dd45b49678211483fe30"
     }
 ```
 
-3. http://localhost:3000/api_moviesapp/movies/addImage/:idMovie -> ejemplo : 60528b0bbcbf140ec9984788
+3. http://localhost:3000/api_moviesapp/movies/addImage/:idMovie -> example : 60528b0bbcbf140ec9984788
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por multipart -> image : file
+Please, send this data:
+    By headers -> Authorization: Token of user
+    by multipart -> image : file
 ```
 
 ### Methods DELETE
 
-1. http://localhost:3000/api_moviesapp/movies/delete/:idMovie -> ejemplo : 6052890709820e0dd4f64738
+1. http://localhost:3000/api_moviesapp/movies/delete/:idMovie -> example : 6052890709820e0dd4f64738
 
 _Ejemplo_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
+Please, send this data:
+    By headers -> Authorization: Token of user
 
 ```
 
 ### Methods PUT
 
-1. http://localhost:3000/api_moviesapp/movies/edit/:idMovie -> ejemplo : 6052890709820e0dd4f64738
+1. http://localhost:3000/api_moviesapp/movies/edit/:idMovie -> example : 6052890709820e0dd4f64738
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por body -> {
-	   "name": "nombre de la pelicula"
+Please, send this data:
+    By headers -> Authorization: Token of user
+    By body -> {
+	   "name": "name of the movie"
     }
 ```
 
 ## Actor 
 
-_Rutas de Actores_ 
 
 ### Methods GET
 
 1. http://localhost:3000/api_moviesapp/actors
 
-_Retorna todos los actores y sus ids_
+_Returns all actors_
 
 2. http://localhost:3000/api_moviesapp/actors/:idActor -> ejemplo : 6052dd45b49678211483fe30
 
-_Retorna un actor_
+_Returs one actor_
 
 ### Methods POST
 
 1. http://localhost:3000/api_moviesapp/actors/add
 
-_Ejemplo_
+_Example_
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
-    Por body -> {
-        "name": "nombre del actor"
+Please, send this data: 
+    By headers -> Authorization: Token of user
+    By body -> {
+        "name": "name of the actor"
     }
 ```
 
@@ -240,8 +238,8 @@ Por favor envia los siguiente datos:
 1. http://localhost:3000/api_moviesapp/actors/delete/idActor -> ejemplo : 6052e440cf3ba32697677d98
 
 ```
-Por favor envia los siguiente datos: 
-    Por cabezera -> Authorization: Token de usuario
+Please, send this data: 
+    By cabezera -> Authorization: Token de usuario
 ```
 
 ## Autores ✒️
