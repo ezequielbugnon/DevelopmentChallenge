@@ -153,7 +153,6 @@ Please, send this data:
     By headers -> Authorization: Token of user
     By body -> {
         "name": "name of the movie",
-        "director": "Director ID"
     }
 ```
 
@@ -177,6 +176,18 @@ _Example_
 Please, send this data:
     By headers -> Authorization: Token of user
     by multipart -> image : file
+```
+
+4. http://localhost:3000/api_moviesapp/movies/addDirector/idMovie -> example : 605445d456bdfb21b3402e5c
+
+_Example_
+
+```
+Please, send this data: 
+    By headers -> Authorization: Token of user
+    By body -> {
+        "directorID": "6052dd45b49678211483fe30",
+    }
 ```
 
 ### Methods DELETE
@@ -240,6 +251,89 @@ Please, send this data:
 ```
 Please, send this data: 
     By headers -> Authorization: Token of user
+
+```
+
+## Routes of tv shows
+
+
+### Methods GET
+
+1. http://localhost:3000/api_moviesapp/tvshows
+
+_Returns all tv shows_
+
+2. http://localhost:3000/api_moviesapp/tvshows/:id-tv-show -> example : 6051367766114b36341c5d33
+
+_Returns one tv show_
+
+3. http://localhost:3000/api_moviesapp/tvshows/search/:search -> example : friends
+
+_Returns the data that is matched_
+
+
+### Methods POST
+
+1. http://localhost:3000/api_moviesapp/tvshows/movies/add 
+
+_Example_
+
+```
+Please, send this data: 
+    By headers -> Authorization: Token of user
+    By body -> {
+        "name": "name tv show",
+    }
+```
+
+2. http://localhost:3000/api_moviesapp/tvshows/addActor/:id_tv_show -> example : 60528b0bbcbf140ec9984788
+
+_Example_
+
+```
+Please, send this data:
+    By headers -> Authorization: Token of user
+    By body -> {
+	    "actorID":"6052dd45b49678211483fe30"
+    }
+```
+
+3. http://localhost:3000/api_moviesapp/tvshows/addDirector/id_tv_show -> example : 605445d456bdfb21b3402e5c
+
+_Example_
+
+```
+Please, send this data: 
+    By headers -> Authorization: Token of user
+    By body -> {
+        "directorID": "6052dd45b49678211483fe30",
+    }
+```
+
+### Methods DELETE
+
+1. http://localhost:3000/api_moviesapp/tvshows/delete/:id_tv_show -> example : 6052890709820e0dd4f64738
+
+_Ejemplo_
+
+```
+Please, send this data:
+    By headers -> Authorization: Token of user
+
+```
+
+### Methods PUT
+
+1. http://localhost:3000/api_moviesapp/tvshows/edit/:id_tv_show -> example : 6052890709820e0dd4f64738
+
+_Example_
+
+```
+Please, send this data:
+    By headers -> Authorization: Token of user
+    By body -> {
+	   "name": "name of the tv show"
+    }
 ```
 
 ## Autores ✒️

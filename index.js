@@ -4,6 +4,7 @@ const userRoutes = require('./api/routes/userRoutes.js');
 const moviesRoutes = require('./api/routes/movieRoutes.js');
 const directorRoutes = require('./api/routes/directorRoutes.js');
 const actorRoutes = require('./api/routes/actorRoutes.js');
+const tvShowRoutes = require('./api/routes/tvShowRoutes.js');
 const multer = require('multer');
 const morgan = require('morgan');
 const path = require('path');
@@ -34,5 +35,6 @@ app.use(nameAPI, userRoutes);
 app.use(nameAPI, moviesRoutes);
 app.use(nameAPI, directorRoutes);
 app.use(nameAPI, actorRoutes);
+app.use(nameAPI, tvShowRoutes);
 
 app.listen(app.get('port'), () => console.log("The app server has started!!!"));

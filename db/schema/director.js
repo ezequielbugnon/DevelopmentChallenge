@@ -8,6 +8,10 @@ const directorSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: "Movie" 
     }],
+    tvshows: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "Tvshow" 
+    }],
     updated_at: { type: Date, default: Date.now() }
 })
 

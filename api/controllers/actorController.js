@@ -3,7 +3,7 @@ const actorController = {}
 
 actorController.getAllActor = async(req, res) =>{
     try {
-        const actor = await Actor.find({}).populate('movies', {actors: 0, director:0});
+        const actor = await Actor.find({}).populate('movies', {actors: 0, director:0}).populate('tvshows', {actors: 0, director:0});
         if(actor){
             res.status(200).json({
                 response: actor
@@ -24,7 +24,7 @@ actorController.getAllActor = async(req, res) =>{
 actorController.getOneActor = async(req, res) =>{
     try {
         let params = req.params.id;
-        let actor = await Actor.findById(params).populate('movies', {actors: 0, director:0});;
+        let actor = await Actor.findById(params).populate('movies', {actors: 0, director:0}).populate('tvshows', {actors: 0, director:0});
         if(actor){
             res.status(200).json({
                 response: actor
@@ -85,7 +85,8 @@ actorController.deleteActor = async(req, res) => {
         }
     } catch (error) {
         res.status(400).json({
-            response: 'Actor delete'
+            response: 'Actor delete',
+            error
         })
         console.log(error);
     }

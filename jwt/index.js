@@ -11,7 +11,6 @@ token.create = (paylod) => {
 
 token.check = async (req, res, next) => {
     const tk = req.headers['authorization'];
-    console.log(tk)
     if(!tk){
         return res.status(401).send({ auth: false, token: 'Token is not provided' })
     }

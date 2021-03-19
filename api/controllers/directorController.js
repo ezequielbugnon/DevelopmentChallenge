@@ -3,7 +3,7 @@ const directorController = {}
 
 directorController.getAllDirector = async(req, res) => {
     try {
-        const director = await Director.find({}).populate('movies',{director:0, actors:0});
+        const director = await Director.find({}).populate('movies',{director:0, actors:0}).populate('tvshows', {director:0, actors:0});
         if(director){
             res.status(200).json({
                 response: director
@@ -24,7 +24,7 @@ directorController.getAllDirector = async(req, res) => {
 directorController.getOneDirector = async(req, res) =>{
     try {
         let params = req.params.id;
-        let director = await Director.findById(params).populate('movies',{director:0, actors:0});
+        let director = await Director.findById(params).populate('movies',{director:0, actors:0}).populate('tvshows', {director:0, actors:0});
         if(director){
             res.status(200).json({
                 response: director

@@ -13,7 +13,7 @@ Cloudinary.config({
   
 movieController.getAllMovies = async(req, res) => {
     try {
-        const movies = await Movies.find({}).populate('director', {movies: 0}).populate('actors', {movies:0});
+        const movies = await Movies.find({}).populate('director', {movies: 0, tvshows: 0}).populate('actors', {movies:0, tvshows:0});
         if(movies){
             res.status(200).json({
                 response: movies
@@ -34,7 +34,7 @@ movieController.getAllMovies = async(req, res) => {
 movieController.getOneMovie = async (req, res) => {
     try {
         let params = req.params.id;
-        let movie = await Movies.findById(params).populate('director').populate('actors');
+        let movie = await Movies.findById(params).populate('director', {movies: 0, tvshows: 0}).populate('actors', {movies:0, tvshows:0});
         if(movie){
             res.status(200).json({
                 response: movie
@@ -55,26 +55,19 @@ movieController.getOneMovie = async (req, res) => {
 
 movieController.createMovie = async (req, res) =>{
     try {
-        const { name, director} = req.body;
-        if( name && director){
+        const { name } = req.body;
+        if( name ){
           let movie = new Movies({
-              name,
-              director
+              name
           });
 
           let result = await movie.save();
 
           if(result){
-             const response = await Director.findById(director);
-             response.movies.push(result._id);
-             await response.save();
-             if(response){
                 res.status(200).json({
                     response: 'Data of movie created',
                     result
-                })
-             }
-            
+                })            
           }
         }else{
             res.status(400).json({
@@ -84,6 +77,7 @@ movieController.createMovie = async (req, res) =>{
     } catch (error) {
         res.status(400).json({
             response: 'Data of movie no created',
+            error
         })
         console.log(error)
     }
@@ -107,7 +101,8 @@ movieController.editMovie = async(req, res) =>{
       
     } catch (error) {
         res.status(400).json({
-            response: 'error could not edit'
+            response: 'error could not edit',
+            error
         })
         console.log(error)
     }
@@ -129,7 +124,8 @@ movieController.deleteMovie = async(req, res) =>{
         }
     } catch (error) {
         res.status(400).json({
-            response: 'Data of movie not delete'
+            response: 'Data of movie not delete',
+            error
         })
         console.log(error);
     }
@@ -142,7 +138,7 @@ movieController.searchMovie = async(req, res) =>{
             "$or":[
                 { "name":{ "$regex": serching, "$options": "i" }}
             ]
-        })
+        }).populate('director', {movies: 0, tvshows: 0}).populate('actors', {movies:0, tvshows:0});
         if(match.length >= 1){
             res.status(200).json({match})
         }
@@ -150,6 +146,7 @@ movieController.searchMovie = async(req, res) =>{
             res.status(404).json({ match: 'There aren\'t results' })
         }
     } catch (error) {
+        res.status(404).json({ match: 'There aren\'t results', error })
         console.log(error)
     }
 }
@@ -175,7 +172,7 @@ movieController.addActorInMovie = async(req, res)=>{
             res.status(404).json({response: 'Incorrects ids'})
         }
     } catch (error) {
-        res.status(404).json({response: 'Incorrects ids'})
+        res.status(404).json({response: 'Incorrects ids', error})
         console.log(error) 
     }
 }
@@ -199,10 +196,40 @@ movieController.addImage = async(req, res) =>{
         } catch (error) {
           console.log(error)
              res.json({
-               response: 'Error file upload'
+               response: 'Error file upload',
+               error
              })
         }
     }
 }
+
+movieController.addDirector = async(req, res)=>{
+    try {
+        const { directorID }= req.body;
+        const params = req.params.id;
+        let movie = await Movies.findById(params);
+        const director = await Director.findById(directorID);
+
+        if(movie && director){
+            movie.director = directorID;
+            director.movies.push(movie._id);
+            let save = await movie.save();
+            let saveMovie = await director.save();
+
+            if(save && saveMovie){
+                res.status(200).json({response: 'director added in movie'})
+            }else{
+                res.status(400).json({response: 'no director added in movie'})
+            }
+
+        }else{
+            res.status(404).json({response: 'Incorrects ids'})
+        }
+    } catch (error) {
+        res.status(404).json({response: 'Incorrects ids', error})
+        console.log(error) 
+    }
+}
+
 
 module.exports = movieController;
