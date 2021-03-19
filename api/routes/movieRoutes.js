@@ -11,6 +11,6 @@ router.get('/movies/search/:search', movieController.searchMovie);
 router.post('/movies/addActor/:id', token.check, movieController.addActorInMovie); 
 router.post('/movies/addDirector/:id', token.check, movieController.addDirector); 
 router.post('/movies/addImage/:id', token.check,movieController.addImage); 
-
+router.delete('/movies/deleteImage/:id', token.check, movieController.deleteImage);
 
 module.exports = router;

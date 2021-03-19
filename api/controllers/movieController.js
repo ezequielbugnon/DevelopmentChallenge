@@ -203,6 +203,25 @@ movieController.addImage = async(req, res) =>{
     }
 }
 
+movieController.deleteImage = async (req, res) =>{
+    try {
+        const result = await Movies.findById(req.params.id)
+        await Cloudinary.v2.uploader.destroy(result.image);
+        result.image = "";
+        let response = await result.save();
+        if(response){
+          res.status(200).json({'message': 'image deleted'});  
+        }else{
+            res.status(400).json({'message': 'image not deleted'});  
+        }
+    } catch (error) {
+        res.status(401).json({error});
+    }
+   
+
+}
+
+
 movieController.addDirector = async(req, res)=>{
     try {
         const { directorID }= req.body;

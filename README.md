@@ -202,6 +202,16 @@ Please, send this data:
 
 ```
 
+2. http://localhost:3000/api_moviesapp/movies/deleteImage/:idMovie -> example : 6052890709820e0dd4f64738
+
+_Ejemplo_
+
+```
+Please, send this data:
+    By headers -> Authorization: Token of user
+
+```
+
 ### Methods PUT
 
 1. http://localhost:3000/api_moviesapp/movies/edit/:idMovie -> example : 6052890709820e0dd4f64738
