@@ -5,7 +5,7 @@ dotenv.config()
 
 const db = async () => {
     try {
-        await mongoose.connect(process.env.DB_CONNECTION,{
+        await mongoose.connect(process.env.DB_CONNECTION_LAB,{
             useNewUrlParser: true, useUnifiedTopology: true, 
             useFindAndModify: false, useCreateIndex: true 
         })

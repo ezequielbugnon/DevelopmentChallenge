@@ -3,7 +3,7 @@ const token = {}
 
 token.create = (paylod) => {
     const tk = jwt.sign(paylod, process.env.CONFIG_SECRET, {
-        expiresIn: '1h'
+        expiresIn: '3h'
     })
     return tk
 }
