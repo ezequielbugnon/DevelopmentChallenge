@@ -114,7 +114,7 @@ _Returns one director_
 
 ### Methods DELETE 
 
-1. http://localhost:3000/api_moviesapp/directors/delete/idDirector -> example : 60511c5ffa528726c634428c
+1. http://localhost:3000/api_moviesapp/directors/delete/:idDirector -> example : 60511c5ffa528726c634428c
 
 
 _Example_
@@ -178,7 +178,7 @@ Please, send this data:
     by multipart -> image : file
 ```
 
-4. http://localhost:3000/api_moviesapp/movies/addDirector/idMovie -> example : 605445d456bdfb21b3402e5c
+4. http://localhost:3000/api_moviesapp/movies/addDirector/:idMovie -> example : 605445d456bdfb21b3402e5c
 
 _Example_
 
@@ -256,7 +256,7 @@ Please, send this data:
 
 ### Methods DELETE
 
-1. http://localhost:3000/api_moviesapp/actors/delete/idActor -> example : 6052e440cf3ba32697677d98
+1. http://localhost:3000/api_moviesapp/actors/delete/:idActor -> example : 6052e440cf3ba32697677d98
 
 ```
 Please, send this data: 
@@ -308,7 +308,7 @@ Please, send this data:
     }
 ```
 
-3. http://localhost:3000/api_moviesapp/tvshows/addDirector/id_tv_show -> example : 605445d456bdfb21b3402e5c
+3. http://localhost:3000/api_moviesapp/tvshows/addDirector/:id_tv_show -> example : 605445d456bdfb21b3402e5c
 
 _Example_
 
