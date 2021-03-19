@@ -1,25 +1,15 @@
-import { Router } from 'express';
-import { 
-    getAllMovies, 
-    getOneMovie, 
-    createMovie,
-    deleteMovie,
-    editMovie,
-    searchMovie,
-    addActorInMovie,
-    addImage
-} from '../controllers/movieController.js';
-import token from '../../jwt/index.js'
+const router = require('express').Router();
+const movieController = require('../controllers/movieController.js');
+const token = require('../../jwt/index.js');
 
-const router = Router();
+router.get('/movies',movieController.getAllMovies);
+router.get('/movies/:id',movieController.getOneMovie);
+router.post('/movies/add',token.check,movieController.createMovie);
+router.delete('/movies/delete/:id',token.check,movieController.deleteMovie);
+router.put('/movies/edit/:id', token.check,movieController.editMovie); 
+router.get('/movies/search/:search',movieController.searchMovie); 
+router.post('/movies/addActor/:id', token.check,movieController.addActorInMovie); 
+router.post('/movies/addImage/:id', token.check,movieController.addImage); 
 
-router.get('/movies', getAllMovies);
-router.get('/movies/:id', getOneMovie);
-router.post('/movies/add',token.check, createMovie);
-router.delete('/movies/delete/:id',token.check, deleteMovie);
-router.put('/movies/edit/:id', token.check, editMovie); 
-router.get('/movies/search/:search', searchMovie); 
-router.post('/movies/addActor/:id', token.check, addActorInMovie); 
-router.post('/movies/addImage/:id', token.check, addImage); 
 
-export default router;
+module.exports = router;

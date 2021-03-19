@@ -1,11 +1,10 @@
-import { Router } from 'express';
-import {register, login, me} from '../controllers/userController.js';
-import token from '../../jwt/index.js'
+const router = require('express').Router();
+const userController = require('../controllers/userController.js');
+const token = require('../../jwt/index.js');
 
-const router = Router();
+router.post('/user/login',userController.login);
+router.post('/user/register',userController.register);
+router.get('/user/me', token.check ,userController.me);
 
-router.post('/user/login', login);
-router.post('/user/register', register);
-router.get('/user/me', token.check ,me);
 
-export default router;
+module.exports= router;

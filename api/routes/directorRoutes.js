@@ -1,17 +1,12 @@
-import { Router } from 'express';
-import { 
-    getAllDirector, 
-    getOneDirector, 
-    createDirector,
-    deleteDirector,
-} from '../controllers/directorController.js';
-import token from '../../jwt/index.js'
+const router = require('express').Router();
+const directorController = require('../controllers/directorController.js');
+const token = require('../../jwt/index.js');
 
-const router = Router();
 
-router.get('/directors', getAllDirector);
-router.get('/directors/:id', getOneDirector);
-router.post('/directors/add',token.check, createDirector);
-router.delete('/directors/delete/:id',token.check, deleteDirector);
+router.get('/directors', directorController.getAllDirector);
+router.get('/directors/:id', directorController.getOneDirector);
+router.post('/directors/add',token.check, directorController.createDirector);
+router.delete('/directors/delete/:id',token.check, directorController.deleteDirector);
 
-export default router;
+
+module.exports= router;

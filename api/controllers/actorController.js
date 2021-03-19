@@ -1,8 +1,9 @@
-import Actor from '../../db/schema/actor.js';
+const Actor = require('../../db/schema/actor.js');
+const actorController = {}
 
-export async function getAllActor(req, res){
+actorController.getAllActor = async(req, res) =>{
     try {
-        const actor = await Actor.find({});
+        const actor = await Actor.find({}).populate('movies', {actors: 0, director:0});
         if(actor){
             res.status(200).json({
                 response: actor
@@ -20,10 +21,10 @@ export async function getAllActor(req, res){
     }
 }
 
-export async function getOneActor(req, res) {
+actorController.getOneActor = async(req, res) =>{
     try {
         let params = req.params.id;
-        let actor = await Actor.findById(params);
+        let actor = await Actor.findById(params).populate('movies', {actors: 0, director:0});;
         if(actor){
             res.status(200).json({
                 response: actor
@@ -42,7 +43,7 @@ export async function getOneActor(req, res) {
     }
 }
 
-export async function createActor(req, res){
+actorController.createActor = async(req, res) =>{
     try {
         const { name } = req.body;
         if( name ){
@@ -68,7 +69,7 @@ export async function createActor(req, res){
     }
 }
 
-export async function deleteActor(req, res){
+actorController.deleteActor = async(req, res) => {
     try {
         let params = req.params.id;
         let deleting = await Actor.findByIdAndDelete(params);
@@ -89,3 +90,6 @@ export async function deleteActor(req, res){
         console.log(error);
     }
 }
+
+
+module.exports = actorController;

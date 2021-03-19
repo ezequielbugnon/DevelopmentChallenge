@@ -1,8 +1,9 @@
-import Director from '../../db/schema/director.js';
+const Director = require('../../db/schema/director.js');
+const directorController = {}
 
-export async function getAllDirector(req, res){
+directorController.getAllDirector = async(req, res) => {
     try {
-        const director = await Director.find({}).populate('movies');
+        const director = await Director.find({}).populate('movies',{director:0, actors:0});
         if(director){
             res.status(200).json({
                 response: director
@@ -20,10 +21,10 @@ export async function getAllDirector(req, res){
     }
 }
 
-export async function getOneDirector(req, res) {
+directorController.getOneDirector = async(req, res) =>{
     try {
         let params = req.params.id;
-        let director = await Director.findById(params).populate('movies');
+        let director = await Director.findById(params).populate('movies',{director:0, actors:0});
         if(director){
             res.status(200).json({
                 response: director
@@ -42,7 +43,7 @@ export async function getOneDirector(req, res) {
     }
 }
 
-export async function createDirector(req, res){
+directorController.createDirector = async(req, res) =>{
     try {
         const { name } = req.body;
         if( name ){
@@ -68,7 +69,7 @@ export async function createDirector(req, res){
     }
 }
 
-export async function deleteDirector(req, res){
+directorController.deleteDirector = async(req, res) =>{
     try {
         let params = req.params.id;
         let deleting = await Director.findByIdAndDelete(params);
@@ -89,3 +90,6 @@ export async function deleteDirector(req, res){
         console.log(error);
     }
 }
+
+
+module.exports = directorController;

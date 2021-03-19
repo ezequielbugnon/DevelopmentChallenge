@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 dotenv.config()
 
-export const db = async () => {
+const db = async () => {
     try {
         await mongoose.connect(process.env.DB_CONNECTION,{
             useNewUrlParser: true, useUnifiedTopology: true, 
@@ -18,3 +18,4 @@ export const db = async () => {
     }
 }
 
+module.exports = db;

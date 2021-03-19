@@ -1,7 +1,9 @@
-import Movies from '../../db/schema/movie.js';
-import Director from '../../db/schema/director.js';
-import Cloudinary from 'cloudinary';
-import fs from 'fs-extra';
+const Movies = require('../../db/schema/movie.js');
+const Actor = require('../../db/schema/actor.js');
+const Director = require('../../db/schema/director.js');
+const Cloudinary = require('cloudinary');
+const fs = require('fs-extra');
+const movieController = {}
 
 Cloudinary.config({ 
     cloud_name: 'dosy3pkww', 
@@ -9,10 +11,9 @@ Cloudinary.config({
     api_secret: process.env.APISECRET
 });
   
-
-export async function getAllMovies(req, res){
+movieController.getAllMovies = async(req, res) => {
     try {
-        const movies = await Movies.find({}).populate('director', {movies: 0}).populate('actors');
+        const movies = await Movies.find({}).populate('director', {movies: 0}).populate('actors', {movies:0});
         if(movies){
             res.status(200).json({
                 response: movies
@@ -30,7 +31,7 @@ export async function getAllMovies(req, res){
     }
 }
 
-export async function getOneMovie(req, res) {
+movieController.getOneMovie = async (req, res) => {
     try {
         let params = req.params.id;
         let movie = await Movies.findById(params).populate('director').populate('actors');
@@ -52,7 +53,7 @@ export async function getOneMovie(req, res) {
     }
 }
 
-export async function createMovie(req, res){
+movieController.createMovie = async (req, res) =>{
     try {
         const { name, director} = req.body;
         if( name && director){
@@ -60,6 +61,7 @@ export async function createMovie(req, res){
               name,
               director
           });
+
           let result = await movie.save();
 
           if(result){
@@ -82,13 +84,12 @@ export async function createMovie(req, res){
     } catch (error) {
         res.status(400).json({
             response: 'Data of movie no created',
-            result
         })
         console.log(error)
     }
 }
 
-export async function editMovie(req, res){
+movieController.editMovie = async(req, res) =>{
     try {
         let params = req.params.id;
         const { name } = req.body;
@@ -112,7 +113,7 @@ export async function editMovie(req, res){
     }
 }
 
-export async function deleteMovie(req, res){
+movieController.deleteMovie = async(req, res) =>{
     try {
         let params = req.params.id;
         let deleting = await Movies.findByIdAndDelete(params);
@@ -134,7 +135,7 @@ export async function deleteMovie(req, res){
     }
 }
 
-export async function searchMovie(req, res){
+movieController.searchMovie = async(req, res) =>{
     try {
         let serching = req.params.search;
         let match = await Movies.find({
@@ -153,27 +154,33 @@ export async function searchMovie(req, res){
     }
 }
 
-export async function addActorInMovie(req, res){
+movieController.addActorInMovie = async(req, res)=>{
     try {
         const { actorID }= req.body;
         const params = req.params.id;
         let movie = await Movies.findById(params);
-        if(movie){
+        let actor = await Actor.findById(actorID);
+        if(movie && actor){
+            actor.movies.push(params);
             movie.actors.push(actorID);
             let save = await movie.save();
-            if(save){
+            let saveActor = await actor.save();
+            if(save && saveActor){
                 res.status(200).json({response: 'actor added in movie'})
             }else{
                 res.status(400).json({response: 'no actor added in movie'})
             }
 
+        }else{
+            res.status(404).json({response: 'Incorrects ids'})
         }
     } catch (error) {
+        res.status(404).json({response: 'Incorrects ids'})
         console.log(error) 
     }
 }
 
-export async function addImage(req, res){
+movieController.addImage = async(req, res) =>{
     if(req.file && req.body){
         try {
           let { path } = req.file; 
@@ -197,3 +204,5 @@ export async function addImage(req, res){
         }
     }
 }
+
+module.exports = movieController;

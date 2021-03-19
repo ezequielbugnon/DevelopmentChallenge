@@ -1,8 +1,8 @@
-import token from '../../jwt/index.js';
-import User from '../../db/schema/user.js';
+const token = require('../../jwt/index.js');
+const User = require('../../db/schema/user.js');
+const userControler = {}
 
-
-export async function register(req, res){
+userControler.register = async (req, res) => {
     try {
     const { name , email, password }  = req.body;
         console.log(validateEmail(email))
@@ -23,8 +23,7 @@ export async function register(req, res){
         return res.status(400).json(error);
     }
 }
-
-export async function login (req, res){
+userControler.login = async (req, res) => {
         const {email, password } = req.body
         if(validateEmail(email) && validatePassword(password)){
           isUserExists(email, password, res);
@@ -33,7 +32,7 @@ export async function login (req, res){
         }
 }
 
-export async function me(req, res){
+userControler.me = async (req, res) =>{
         let response;
         try {
              let user = await User.findById(req.userId, { password: 0, _id: 0, updated_at: 0 });
@@ -112,3 +111,4 @@ function tokenRegister(resp, res){
 }
 
 
+module.exports = userControler;

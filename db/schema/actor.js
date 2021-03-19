@@ -1,9 +1,14 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const actorSchema = new Schema({
     name: { type: String, required: [true, 'The name is required'] },
+    movies:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Movie"
+    }],
     updated_at: { type: Date, default: Date.now() }
 })
 
-export default mongoose.model('Actor', actorSchema);
+
+module.exports = mongoose.model('Actor', actorSchema);

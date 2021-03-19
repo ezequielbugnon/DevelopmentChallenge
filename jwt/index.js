@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+const jwt = require('jsonwebtoken');
 const token = {}
 
 token.create = (paylod) => {
@@ -27,4 +26,5 @@ token.check = async (req, res, next) => {
     
 }
 
-export default token;
+
+module.exports = token;

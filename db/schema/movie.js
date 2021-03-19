@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 
@@ -16,4 +16,5 @@ const movieSchema = new Schema({
     updated_at: { type: Date, default: Date.now() }
 })
 
-export default mongoose.model('Movie', movieSchema);
+
+module.exports = mongoose.model('Movie', movieSchema);

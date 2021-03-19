@@ -1,17 +1,15 @@
-import express from 'express';
-import { db } from './db/index.js';
-import userRoutes from './api/routes/userRoutes.js';
-import moviesRoutes from './api/routes/movieRoutes.js';
-import directorRoutes from './api/routes/directorRoutes.js';
-import actorRoutes from './api/routes/actorRoutes.js';
-import multer from 'multer';
-import morgan from 'morgan';
-import path from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require('express');
+const db = require('./db/index.js');
+const userRoutes = require('./api/routes/userRoutes.js');
+const moviesRoutes = require('./api/routes/movieRoutes.js');
+const directorRoutes = require('./api/routes/directorRoutes.js');
+const actorRoutes = require('./api/routes/actorRoutes.js');
+const multer = require('multer');
+const morgan = require('morgan');
+const path = require('path');
 
 const app = express();
+
 const nameAPI = '/api_moviesapp';
 db();
 
@@ -21,8 +19,9 @@ const storage = multer.diskStorage({
 
     cb(null, Date.now() + path.extname(file.originalname))
   }
-})
-app.use(multer({ storage }).single('image'))
+});
+
+app.use(multer({ storage }).single('image'));
 
 app.set('port', 3000, process.env.PORT);
 
